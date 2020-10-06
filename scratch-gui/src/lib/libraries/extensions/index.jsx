@@ -64,6 +64,9 @@ import onegpioCpxInsetIconURL from './onegpioCpx/onegpioCpx-small.png';
 import onegpioRoboHATImage from './onegpioRoboHAT/onegpioRoboHAT.png';
 import onegpioRoboHATInsetIconURL from './onegpioRoboHAT/onegpioRoboHAT-small.png';
 
+import onegpioNlImage from './onegpioNl/onegpioNl.png';
+import onegpioNlInsetIconURL from './onegpioNl/onegpioNl-small.png';
+
 export default [
     {
         name: (
@@ -420,6 +423,21 @@ export default [
         iconURL: onegpioRoboHATImage,
         insetIconURL: onegpioRoboHATInsetIconURL,
         description: 'OneGPIORoboHAT',
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://mryslab.github.io/s3-extend/'
+
+    }
+,
+    {
+        name: 'OneGpio Newland',
+        extensionId: 'onegpioNl',
+        collaborator: "Newland Software",
+        iconURL: onegpioNlImage,
+        insetIconURL: onegpioNlInsetIconURL,
+        description: 'OneGPIONl',
         featured: true,
         disabled: false,
         internetConnectionRequired: true,

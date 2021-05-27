@@ -47,6 +47,7 @@ let pin_modes = new Array(30).fill(-1);
 let alerted = false;
 
 let connection_pending = false;
+let client_code = false;
 
 // general outgoing websocket message holder
 let msg = null;
@@ -1011,7 +1012,7 @@ class Scratch3NlOneGPIO {
             wait_open.push(callbackEntry);
         } else {
             let txt_path = args['TXT_PATH'];
-			msg = {"command": "write_txt", "txt_path": txt_path};
+			msg = {"command": "write_txt", "txt_path": txt_path, "uuid": client_code};
 			msg = JSON.stringify(msg);
 			window.socketr.send(msg);
             //return digital_inputs[sonar_report_pin];
@@ -1031,7 +1032,7 @@ class Scratch3NlOneGPIO {
             wait_open.push(callbackEntry);
         } else {
             let print_info = args['PRINT_INFO'];
-            msg = {"command": "out_Put_Screen", "print_info": print_info};
+            msg = {"command": "out_Put_Screen", "print_info": print_info, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1051,7 +1052,7 @@ class Scratch3NlOneGPIO {
             wait_open.push(callbackEntry);
         } else {
             let trans_num = args['TRANS_NUM'];
-            msg = {"command": "test_transmit", "trans_num": trans_num};
+            msg = {"command": "test_transmit", "trans_num": trans_num, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
 
@@ -1073,7 +1074,7 @@ class Scratch3NlOneGPIO {
         } else {
             let csv_path = args['CSV_PATH'];
             let image_path = args['IMAGE_PATH'];
-            msg = {"command": "formDistinguish_invoice", "csv_path": csv_path, "image_path":image_path};
+            msg = {"command": "formDistinguish_invoice", "csv_path": csv_path, "image_path":image_path, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1092,7 +1093,7 @@ class Scratch3NlOneGPIO {
             wait_open.push(callbackEntry);
         } else {
             let csv_path = args['CSV_PATH'];
-            msg = {"command": "create_CSV", "csv_path": csv_path};
+            msg = {"command": "create_CSV", "csv_path": csv_path, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1114,7 +1115,7 @@ class Scratch3NlOneGPIO {
             let user_name = args['USER_NAME'];
             let department = args['DEPARTMENT'];
             let csv_path = args['CSV_PATH'];
-            msg = {"command": "auto_Write", "web_site": web_site,"user_name": user_name,"department": department, "csv_path": csv_path};
+            msg = {"command": "auto_Write", "web_site": web_site,"user_name": user_name,"department": department, "csv_path": csv_path, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1134,7 +1135,7 @@ class Scratch3NlOneGPIO {
         } else {
             let group_name = args['GROUP_NAME'];
             let user_name = args['USER_NAME'];
-            msg = {"command": "send_Wechat", "group_name": group_name, "user_name": user_name};
+            msg = {"command": "send_Wechat", "group_name": group_name, "user_name": user_name, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1155,7 +1156,7 @@ class Scratch3NlOneGPIO {
             let driver_name = args['DRIVER_NAME'];
             let web_url = args['WEB_URL'];
 
-            msg = {"command": "open_Web", "driver_name": driver_name, "web_url": web_url};
+            msg = {"command": "open_Web", "driver_name": driver_name, "web_url": web_url, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1177,7 +1178,7 @@ class Scratch3NlOneGPIO {
             let xpath_value = args['XPATH_VALUE'];
             let input_value = args['INPUT_VALUE'];
 
-            msg = {"command": "web_Input", "driver_name": driver_name, "xpath_value": xpath_value, "input_value": input_value};
+            msg = {"command": "web_Input", "driver_name": driver_name, "xpath_value": xpath_value, "input_value": input_value, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1199,7 +1200,7 @@ class Scratch3NlOneGPIO {
             let driver_name = args['DRIVER_NAME'];
             let xpath = args['XPATH'];
 
-            msg = {"command": "wait_Until_Xpath", "wait_time": wait_time, "driver_name": driver_name, "xpath": xpath};
+            msg = {"command": "wait_Until_Xpath", "wait_time": wait_time, "driver_name": driver_name, "xpath": xpath, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1219,7 +1220,7 @@ class Scratch3NlOneGPIO {
         } else {
             let wait_time = args['WAIT_TIME'];
 
-            msg = {"command": "web_Wait", "wait_time": wait_time};
+            msg = {"command": "web_Wait", "wait_time": wait_time, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1240,7 +1241,7 @@ class Scratch3NlOneGPIO {
             let driver_name = args['DRIVER_NAME'];
             let xpath_value = args['XPATH_VALUE'];
 
-            msg = {"command": "switch_Iframe", "driver_name": driver_name, "xpath_value": xpath_value};
+            msg = {"command": "switch_Iframe", "driver_name": driver_name, "xpath_value": xpath_value, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1260,7 +1261,7 @@ class Scratch3NlOneGPIO {
         } else {
             let driver_name = args['DRIVER_NAME'];
 
-            msg = {"command": "switch_Window", "driver_name": driver_name};
+            msg = {"command": "switch_Window", "driver_name": driver_name, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1282,7 +1283,7 @@ class Scratch3NlOneGPIO {
             let xpath_value = args['XPATH_VALUE'];
             let wait_time = args['WAIT_TIME'];
 
-            msg = {"command": "web_Click", "driver_name": driver_name, "xpath_value": xpath_value, "wait_time": wait_time};
+            msg = {"command": "web_Click", "driver_name": driver_name, "xpath_value": xpath_value, "wait_time": wait_time, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1303,7 +1304,7 @@ class Scratch3NlOneGPIO {
             let driver_name = args['DRIVER_NAME'];
             let xpath_value = args['XPATH_VALUE'];
 
-            msg = {"command": "web_Value_Return", "driver_name": driver_name, "xpath_value": xpath_value};
+            msg = {"command": "web_Value_Return", "driver_name": driver_name, "xpath_value": xpath_value, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1325,7 +1326,7 @@ class Scratch3NlOneGPIO {
             let xpath_value = args['XPATH_VALUE'];
             let key_name = args['KEY_NAME'];
 
-            msg = {"command": "web_GetValue", "driver_name": driver_name, "xpath_value": xpath_value, "key_name": key_name};
+            msg = {"command": "web_GetValue", "driver_name": driver_name, "xpath_value": xpath_value, "key_name": key_name, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1347,7 +1348,7 @@ class Scratch3NlOneGPIO {
             let xpath_value = args['XPATH_VALUE'];
             let key_name = args['KEY_NAME'];
 
-            msg = {"command": "web_PutValue", "driver_name": driver_name, "xpath_value": xpath_value, "key_name": key_name};
+            msg = {"command": "web_PutValue", "driver_name": driver_name, "xpath_value": xpath_value, "key_name": key_name, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1373,7 +1374,7 @@ class Scratch3NlOneGPIO {
             let db_password = args['DB_PASSWORD'];
 
             msg = {"command": "init_Oracle_Db", "db_code": db_code, "db_host": db_host, "db_port": db_port,
-                "db_name": db_name, "db_user": db_user, "db_password": db_password};
+                "db_name": db_name, "db_user": db_user, "db_password": db_password, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1399,7 +1400,7 @@ class Scratch3NlOneGPIO {
             let db_password = args['DB_PASSWORD'];
 
             msg = {"command": "init_Mysql_Db", "db_code": db_code, "db_host": db_host, "db_port": db_port,
-                "db_name": db_name, "db_user": db_user, "db_password": db_password};
+                "db_name": db_name, "db_user": db_user, "db_password": db_password, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1420,7 +1421,7 @@ class Scratch3NlOneGPIO {
             let db_name = args['DB_NAME'];
             let table_name = args['TABLE_NAME'];
             let key_name = args['KEY_NAME'];
-            msg = {"command": "oracle_Write_To_Db", "db_name": db_name, "table_name": table_name, "key_name": key_name};
+            msg = {"command": "oracle_Write_To_Db", "db_name": db_name, "table_name": table_name, "key_name": key_name, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1441,7 +1442,7 @@ class Scratch3NlOneGPIO {
             let db_name = args['DB_NAME'];
             let table_name = args['TABLE_NAME'];
             let key_name = args['KEY_NAME'];
-            msg = {"command": "mysql_Write_To_Db", "db_name": db_name, "table_name": table_name, "key_name": key_name};
+            msg = {"command": "mysql_Write_To_Db", "db_name": db_name, "table_name": table_name, "key_name": key_name, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1461,7 +1462,7 @@ class Scratch3NlOneGPIO {
         } else {
             let driver_name = args['DRIVER_NAME'];
 
-            msg = {"command": "refresh_Web", "driver_name": driver_name};
+            msg = {"command": "refresh_Web", "driver_name": driver_name, "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1482,23 +1483,10 @@ class Scratch3NlOneGPIO {
             let file_name = args['FILE_NAME'];
             let line = args['LINE'];
 
-            data = {"command": "read_File_Line", "file_name": file_name, "line": line};
-			
+            data = {"command": "read_File_Line", "file_name": file_name, "line": line, "uuid": client_code};
+
             data = JSON.stringify(data);
             window.socketr.send(data);
-			
-			/*
-			const p = new Promise((resolve) => {
-				window.socketr.onmessage = (ev) => {
-					console.log("data: "+ev.data)
-					msg = JSON.parse(ev.data)
-					value = msg['value']
-					digital_inputs[sonar_report_pin] = value
-					console.log("get value: "+digital_inputs[sonar_report_pin])
-					resolve()
-				};
-			});
-			*/
 
             return new Promise((resolve) => {
 				window.socketr.onmessage = (ev) => {
@@ -1531,7 +1519,7 @@ class Scratch3NlOneGPIO {
             wait_open.push(callbackEntry);
         } else {
 
-            msg = {"command": "get_Now_Time"};
+            msg = {"command": "get_Now_Time", "uuid": client_code};
             msg = JSON.stringify(msg);
             window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1554,7 +1542,7 @@ class Scratch3NlOneGPIO {
             sonar_report_pin = radius_size;
             let line_color = args['COLOR'];
             //line_color = parseInt(line_color, 10);
-			msg = {"command": "draw_circle", "radius_size": radius_size, "line_color": line_color};
+			msg = {"command": "draw_circle", "radius_size": radius_size, "line_color": line_color, "uuid": client_code};
 			msg = JSON.stringify(msg);
 			window.socketr.send(msg);
             return digital_inputs[sonar_report_pin];
@@ -1600,12 +1588,12 @@ class Scratch3NlOneGPIO {
             return;
         } else {
             connect_attempt = true;
-            debugger
             let url = "ws://" + ws_ip_address + ":9001";
             console.log(url);
             //window.socketr = new WebSocket("ws://127.0.0.1:9001");
             window.socketr = new WebSocket(url);
             msg = JSON.stringify({"id": "to_nl_gateway"});
+            client_code = this.generateUUID();
         }
 
 
@@ -1648,8 +1636,6 @@ class Scratch3NlOneGPIO {
             let pin = null;
             let value = null;
 
-            debugger
-
             // types - digital, analog, sonar
             if (report_type === 'digital_input') {
                 pin = msg['pin'];
@@ -1666,6 +1652,19 @@ class Scratch3NlOneGPIO {
                 digital_inputs[sonar_report_pin] = value;
             }
         };
+    }
+
+    generateUUID() {
+        var d = new Date().getTime();
+        if (window.performance && typeof window.performance.now === "function") {
+            d += performance.now(); //use high-precision timer if available
+        }
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+        return uuid;
     }
 
 
